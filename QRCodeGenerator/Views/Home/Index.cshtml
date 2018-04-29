@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <p class="lead">This is a POC done by CES .NET Team to generate QR Code based on the information and settings provided in the form.</p>
+    <p>
+        @Html.ActionLink("Go" , "QRCode", "Home", new { @class = "btn btn-primary btn-lg" })
+    </p>
+</div>

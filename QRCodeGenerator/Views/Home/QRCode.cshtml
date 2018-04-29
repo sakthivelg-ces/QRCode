@@ -1,0 +1,58 @@
+﻿@model QRCodeGenerator.Models.StudentModel
+
+@{
+    ViewBag.Title = "QR Code";
+}
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Patient Details</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            @using (Html.BeginForm("QRCode", "Home", FormMethod.Post))
+            {
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input class="form-control" name="FirstName"
+                               placeholder="Enter patient first name" value="@Model.FirstName">
+                            @Html.ValidationMessageFor(m => m.FirstName, null, new { @style = "color: red" })
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input class="form-control" name="LastName"
+                               placeholder="Enter patient last name" value="@Model.LastName">
+                        @Html.ValidationMessageFor(m => m.LastName, null, new { @style = "color: red" })
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea class="form-control" rows="3" name="Address"
+                                  placeholder="Enter patient address">@Model.Address</textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Generate</button>
+                            <button type="button" class="btn btn-warning" id="ResetForm">Reset</button>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <img src="@ViewBag.QRCodeImage" class="img-rounded" id="QRCodeImage">
+                    </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ResetForm").click(function () {
+                $(':input').not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+                $("#QRCodeImage").removeAttr('src');
+                return false;
+            });
+        });
+    </script>
+}
